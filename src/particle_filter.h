@@ -21,6 +21,17 @@ struct Particle {
 	std::vector<int> associations;
 	std::vector<double> sense_x;
 	std::vector<double> sense_y;
+    
+    Particle () {}
+    
+    Particle(int idin, double xin, double yin, double thetain) :
+        id(idin),
+        x(xin),
+        y(yin),
+        theta(thetain),
+        weight(1.0)
+    {
+    }
 };
 
 
@@ -28,28 +39,28 @@ struct Particle {
 class ParticleFilter {
 	
 	// Number of particles to draw
-	int num_particles; 
-	
-	
+	int num_particles_;
 	
 	// Flag, if filter is initialized
-	bool is_initialized;
+	bool is_initialized_;
 	
 	// Vector of weights of all particles
-	std::vector<double> weights;
+	std::vector<double> weights_;
 	
 public:
 	
 	// Set of current particles
-	std::vector<Particle> particles;
+	std::vector<Particle> particles_;
 
 	// Constructor
 	// @param M Number of particles
-	ParticleFilter() : num_particles(0), is_initialized(false) {}
+	ParticleFilter() : num_particles_(0), is_initialized_(false) {}
 
 	// Destructor
 	~ParticleFilter() {}
-
+    
+    const std::vector<Particle> & getParticleVector(void) { return particles_; }
+    
 	/**
 	 * init Initializes particle filter by initializing particles to Gaussian
 	 *   distribution around first position and all the weights to 1.
@@ -112,7 +123,7 @@ public:
 	 * initialized Returns whether particle filter is initialized yet or not.
 	 */
 	const bool initialized() const {
-		return is_initialized;
+		return is_initialized_;
 	}
 };
 

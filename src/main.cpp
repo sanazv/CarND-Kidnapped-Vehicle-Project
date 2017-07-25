@@ -38,7 +38,7 @@ int main()
 
   // Read map data
   Map map;
-  if (!read_map_data("../data/map_data.txt", map)) {
+  if (!read_map_data("/Users/ace/Documents/Code/udacity/CarND-Kidnapped-Vehicle-Project/data/map_data.txt", map)) {
 	  cout << "Error: Could not open map file" << endl;
 	  return -1;
   }
@@ -115,7 +115,8 @@ int main()
 		  pf.resample();
 
 		  // Calculate and output the average weighted error of the particle filter over all time steps so far.
-		  vector<Particle> particles = pf.particles;
+          //const vector<Particle> & particles = pf.getParticleVector(); //pf.particles_;
+          vector<Particle> particles = pf.particles_;
 		  int num_particles = particles.size();
 		  double highest_weight = -1.0;
 		  Particle best_particle;
